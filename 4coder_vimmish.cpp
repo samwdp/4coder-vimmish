@@ -1099,10 +1099,10 @@ struct Vim_Key_Binding {
     String_Const_u8  description;
     u32              flags;
     union {
+        Vim_Text_Object*         text_object;
         void*                    generic;
         Vim_Binding_Map*         map;
         Vim_Motion*              motion;
-        Vim_Text_Object*         text_object;
         Vim_Operator*            op;
         Custom_Command_Function* fcoder_command;
     };
@@ -1436,7 +1436,7 @@ vim_keys_are_equal(Vim_Key a, Vim_Key b) {
 }
 
 // @Cleanup: Rearrage to make the forward declare unnecessary. Maybe.
-internal VIM_TEXT_OBJECT(vim_text_object_line);
+internal Vim_Text_Object(vim_text_object_line);
 
 function Vim_Key_Binding*
 vim_query_binding(Application_Links* app, Vim_Binding_Map* map, b32 line_object_on_repeat_input) {
@@ -6263,8 +6263,6 @@ vim_setup_default_mapping(Application_Links* app, Mapping *mapping, Vim_Key vim_
     Bind(project_fkey_command,              KeyCode_F7);
     Bind(project_fkey_command,              KeyCode_F8);
     Bind(project_fkey_command,              KeyCode_F9);
-    Bind(project_fkey_command,              KeyCode_F10);
-    Bind(project_fkey_command,              KeyCode_F11);
     Bind(project_fkey_command,              KeyCode_F12);
     Bind(project_fkey_command,              KeyCode_F13);
     Bind(project_fkey_command,              KeyCode_F14);
